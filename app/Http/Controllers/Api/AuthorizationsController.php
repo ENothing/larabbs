@@ -34,10 +34,11 @@ class AuthorizationsController extends Controller
         $code = $request->code;
 
         $miniProgram = \EasyWeChat::miniProgram();
-        dd($miniProgram);
+
         $data = $miniProgram->auth->session($code);
 
         if (isset($data['errcode'])) {
+            dd(1);
             return $this->response->errorUnauthorized('code 不正确');
         }
 
@@ -48,6 +49,7 @@ class AuthorizationsController extends Controller
         if (!$user) {
             // 找不到 openid 对应的用户要求用户提交
             if (!$request->username) {
+                dd(2);
                 return $this->response->errorForbidden('用户不存在');
             }
 
@@ -60,6 +62,7 @@ class AuthorizationsController extends Controller
             $credentials['password'] = $request->password;
 
             if (!Auth::guard('api')->once($credentials)) {
+                dd(3);
                 return $this->response->errorUnauthorized('用户名或密码错误');
             }
 
