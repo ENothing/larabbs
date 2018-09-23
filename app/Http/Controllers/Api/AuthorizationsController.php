@@ -70,9 +70,12 @@ class AuthorizationsController extends Controller
             $attributes['weapp_openid'] = $data['openid'];
         }
 
+        var_dump(1111111111111111111111111111111);
         $user->update($attributes);
+        var_dump(222222222222222222222);
 
         $token = Auth::guard('api')->fromUser($user);
+        var_dump(33333333333333333333333);
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }
