@@ -34,6 +34,7 @@ class AuthorizationsController extends Controller
         $code = $request->code;
 
         $miniProgram = \EasyWeChat::miniProgram();
+        dd($miniProgram);
         $data = $miniProgram->auth->session($code);
 
         if (isset($data['errcode'])) {
