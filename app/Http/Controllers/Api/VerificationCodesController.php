@@ -33,7 +33,11 @@ class VerificationCodesController extends Controller
 
             try {
                 $result = $easySms->send($phone, [
-                    'content'  =>  "【Lbbs社区】您的验证码是{$code}。如非本人操作，请忽略本短信"
+                    'content'  =>  "【SoulFire-BBS社区】您的验证码是{$code}。如非本人操作，请忽略本短信",
+                    'template' => 'SMS_001',
+                    'data' => [
+                        'code' => $code
+                    ],
                 ]);
             } catch (\GuzzleHttp\Exception\ClientException $exception) {
                 $response = $exception->getResponse();
